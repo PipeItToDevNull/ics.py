@@ -29,3 +29,4 @@ Ics.py is available for Python>=2.7 *and* Python>=3.3 and is Apache2 Licensed.
 ----------
 Personal version put here for cloning. Made by my lil buddy
 ----------
+This can properly read .ics from outlook where .now() reports a time that is very much wrong 

@@ -29,11 +29,7 @@ def remove_x(container):
 def iso_to_arrow(time_container, available_tz={}):
     if time_container is None:
         return None
-
-    # TODO : raise if not iso date
     tz_list = time_container.params.get('TZID')
-    # TODO : raise if len(tz_list) > 1 or if tz is not a valid tz
-    # TODO : see if timezone is registered as a VTIMEZONE
     if tz_list and len(tz_list) > 0:
         tz = tz_list[0]
     else:
@@ -43,9 +39,9 @@ def iso_to_arrow(time_container, available_tz={}):
         val = time_container.value + 'T0000'
     else:
         val = time_container.value
-
     if tz and not (val[-1].upper() == 'Z'):
         naive = arrow.get(val).naive
+        tz = re.sub(r'''[\(\)\"]''', "", tz)
         selected_tz = gettz(tz)
         if not selected_tz:
             selected_tz = available_tz.get(tz, 'UTC')

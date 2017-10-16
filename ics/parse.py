@@ -65,7 +65,10 @@ class ContentLine:
             raise ParseError("No ':' in line '{}'".format(line))
 
         # Separate key and value
-        splitted = line.split(':', 1)
+        if "TZID=" in line:
+            splitted = line.rsplit(':', 1)
+        else:
+            splitted = line.split(':', 1)
         key, value = splitted[0], splitted[1].strip()
 
         # Separate name and params
